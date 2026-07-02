@@ -6,7 +6,6 @@ class lane:
         self.towers = {}
         self.goblins = {}
         self.base = 10
-        self.goblins = {}
         self.turn = 0
         self.historyi = []
         self.total_components = [[],[],[],[],[],[]]
@@ -14,66 +13,65 @@ class lane:
     def create_goblin(self,id):
         self.goblins[id] = Goblin(id)
         self.total_components[0].append(id)
-        print("Spawned {id} goblin on lane1 at position 0.")
+        print(f"Spawned {id} goblin on lane1 at position 0.")
 
     def create_tower(self,id,position):
-        self.historyi.append("")
+        self.historyi.append("Added {id} tower on lane1 at position {position}.")
         self.towers[id] = Tower(id,position)
         self.total_components[position].append(id)
         print(f"Added {id} tower on lane1 at position {position}.")
 
     def run_turn(self):
         self.turn += 1
-        print("Turn {self.turn} started.")
+        print(f"Turn {self.turn} started.")
         for goblin in self.goblins:
             for tower in self.towers:
-                if tower.active == True:
-                    if tower.position == goblin.position:
-                        self.historyi.append("Turn : {self.turn} , {tower.id} attacked {goblin.id} for 1 damage. {goblin.id} hp={goblin.heath}. \n")
-                        print(f"{tower.id} attacked {goblin.id} for 1 damage. {goblin.id} hp={goblin.heath}. \n")
-                        if goblin.health > 0:
-                            goblin.health -= 1
-                            self.total_components[self.goblins.position].pop(goblin.id)
-                            self.total_components[self.goblins.postion + 1].append(goblin.id)
+                if self.towers[tower].active == True:
+                    if self.towers[tower].position == self.goblins[goblin].position:
+                        self.historyi.append("Turn : {self.turn} , {self.towers[tower].id} attacked {self.goblins[goblin].id} for 1 damage. {self.goblins[goblin].id} hp={self.goblins[goblin].heath}. \n")
+                        print(f"{self.towers[tower].id} attacked {self.goblins[goblin].id} for 1 damage. {self.goblins[goblin].id} hp={self.goblins[goblin].heath}. \n")
+                        if self.goblins[goblin].health > 1:
+                            self.goblins[goblin].health -= 1
+                            self.total_components[self.goblins.position].pop(self.goblins[goblin].id)
+                            self.total_components[self.goblins.postion + 1].append(self.goblins[goblin].id)
                             self.goblins[goblin].position += 1
                         else:
                             self.goblins.pop(goblin)
-                            self.total_components[self.goblins.position].pop(goblin.id)
-
-                    elif tower.position +1 == goblin.position:
-                        self.historyi.append( "Turn : {self.turn} , {tower.id} attacked {goblin.id} for 1 damage. {goblin.id} hp={goblin.heath}. \n")
-                        print(f"{tower.id} attacked {goblin.id} for 1 damage. {goblin.id} hp={goblin.heath}. \n")
-                        if goblin.health > 0:
-                            goblin.health -= 1
-                            self.total_components[self.goblins.position].pop(goblin.id)
-                            self.total_components[self.goblins.postion + 1].append(goblin.id)
+                            self.total_components[self.goblins.position].pop(self.goblins[goblin].id)
+                    elif self.towers[tower].position +1 == self.goblins[goblin].position:
+                        self.historyi.append( "Turn : {self.turn} , {self.towers[tower].id} attacked {self.goblins[goblin].id} for 1 damage. {self.goblins[goblin].id} hp={self.goblins[goblin].heath}. \n")
+                        print(f"{self.towers[tower].id} attacked {self.goblins[goblin].id} for 1 damage. {self.goblins[goblin].id} hp={self.goblins[goblin].heath}. \n")
+                        if self.goblins[goblin].health > 1:
+                            self.goblins[goblin].health -= 1
+                            self.total_components[self.goblins.position].pop(self.goblins[goblin].id)
+                            self.total_components[self.goblins.postion + 1].append(self.goblins[goblin].id)
                             self.goblins[goblin].position += 1
                         else:
                             self.goblins.pop(goblin)
-                            self.total_components[self.goblins.position].pop(goblin.id)
+                            self.total_components[self.goblins.position].pop(self.goblins[goblin].id)
 
-                    elif tower.position -1 == goblin.position:
-                        self.historyi.append("Turn : {self.turn} , {tower.id} attacked {goblin.id} for 1 damage. {goblin.id} hp={goblin.heath}. \n")
-                        print(f"{tower.id} attacked {goblin.id} for 1 damage. {goblin.id} hp={goblin.heath}. \n")
-                        if goblin.health > 0:
-                            goblin.health -= 1
-                            self.total_components[self.goblins.position].pop(goblin.id)
-                            self.total_components[self.goblins.postion + 1].append(goblin.id)
+                    elif self.towers[tower].position -1 == self.goblins[goblin].position:
+                        self.historyi.append("Turn : {self.turn} , {self.towers[tower].id} attacked {self.goblins[goblin].id} for 1 damage. {self.goblins[goblin].id} hp={self.goblins[goblin].heath}. \n")
+                        print(f"{self.towers[tower].id} attacked {self.goblins[goblin].id} for 1 damage. {self.goblins[goblin].id} hp={self.goblins[goblin].heath}. \n")
+                        if self.goblins[goblin].health > 1:
+                            self.goblins[goblin].health -= 1
+                            self.total_components[self.goblins.position].pop(self.goblins[goblin].id)
+                            self.total_components[self.goblins.postion + 1].append(self.goblins[goblin].id)
                             self.goblins[goblin].position += 1
 
                         else:
                             self.goblins.pop(goblin)
-                            self.total_components[self.goblins.position].pop(goblin.id)
+                            self.total_components[self.goblins.position].pop(self.goblins[goblin].id)
 
                     else:
-                        self.historyi.append(f"Turn : {self.turn} , {tower.id} found no enemy in range. \n")
-                        print(f"{tower.id} found no enemy in range. \n")
+                        self.historyi.append(f"Turn : {self.turn} , {self.towers[tower].id} found no enemy in range. \n")
+                        print(f"{self.towers[tower].id} found no enemy in range. \n")
 
-            if(goblin.position == 5):
+            if(self.goblins[goblin].position == 5):
                 self.historyi.append("Turn : {self.turn} , {self.goblins.id} attacked Base for 1 damage. Base hp ={self.base} \n")
                 print(f"{self.goblins.id} attacked Base for 1 damage. Base hp ={self.base} \n")
                 self.base -= 1
-                self.total_components[self.goblins.position].pop(goblin.id)
+                self.total_components[self.goblins.position].pop(self.goblins[goblin].id)
                 self.goblins.pop(goblin)
 
 

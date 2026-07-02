@@ -1,10 +1,10 @@
 from lane import lane
 
 lane1 = lane()
-command = input()
 gid = 1
 tid = 1
 while(True):
+    command = input()
     if(command == "SPAWN lane1 goblin"):
         id = 'E' + str(gid)
         lane1.create_goblin(id)
@@ -17,22 +17,22 @@ while(True):
 
     elif(command == "ADD_TOWER lane1 1"):
         id = 'T' + str(tid)
-        lane1.create_tower(1)
+        lane1.create_tower(id,1)
         tid += 1
 
     elif(command == "ADD_TOWER lane1 2"):
         id = 'T' + str(tid)
-        lane1.create_tower(2)
+        lane1.create_tower(id,2)
         tid += 1
 
     elif(command == "ADD_TOWER lane1 3"):
         id = 'T' + str(tid)
-        lane1.create_tower(3)
+        lane1.create_tower(id,3)
         tid += 1
 
     elif(command == "ADD_TOWER lane1 4"):
         id = 'T' + str(tid)
-        lane1.create_tower(4)
+        lane1.create_tower(id,4)
         tid += 1
 
     elif(command == "RUN_TURN"):
