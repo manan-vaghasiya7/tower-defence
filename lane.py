@@ -78,27 +78,30 @@ class lane:
         if(self.base == 0):
             print (f"Status : Completed ")
         else:
-            print(f"Status : Running ")
-        print(f"Turn : {self.turn} ")
-        print(f"Base Health : {self.base} \n")
+            all_lengths = []
+            for i in range(0, 5):
+                if len(self.total_components[i]) == 0:
+                    position_length = 2 
+                else:
+                    for j in self.total_components[i]:
+                        position_length = sum(len(j) + 1)
+                
+                all_lengths.append(position_length)
 
-        for i in range(0,5):
-            print(i,end="")
-            print("  ",end="")
-            for j in range(0,len(self.total_components[i])):
-                print("   " ,end="")
-        print("Base")
+            for i in range(0, 5):
+                print(f"{f"{i}":<{all_lengths[i]}}", end="")
+            print("BASE")
 
-        for i in range(0,5):
-            if(len(self.total_components[i]) == 0):
-                print(". ",end="")
-                print("    ",end="")
-            else:
-                for j in self.total_components[i]:
-                    print (j,end="")
-                    print(",",end="")
+            for i in range(0, 5):
+                if len(self.total_components[i]) == 0:
+                    data_str = ". "
+                else:
+                    for j in self.total_components[i]:
+                        data_str = ",".join(j)
 
-                print(" ",end="")
+                print(f"{data_str:<{all_lengths[i]}}", end="")
+            print("🏰")
+
                 
     def historyi(self):
         for i in self.total_components:
