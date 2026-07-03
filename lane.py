@@ -3,6 +3,7 @@ from tower import Tower
 from sniper_tower import SniperTower
 from run_components.run_towers import run_towers
 from run_components.run_goblins import run_goblins
+from run_components.run_sniper_tower import run_sniper_towers
 import sys
 
 class lane:
@@ -44,40 +45,9 @@ class lane:
         self.turn += 1
         print(f"Turn {self.turn} started.")
 
-
-        for sniper_tower in self.sniper_towers:
-            to_pop = []
-            for goblin in self.goblins:
-
-                if self.sniper_towers[sniper_tower].active == True:
-                    if self.sniper_towers[sniper_tower].range >= abs(self.goblins[goblin].position - self.sniper_towers[sniper_tower].position):
-
-                        if self.goblins[goblin].health > 1:
-                            self.goblins[goblin].health -= 1
-                            self.sniper_towers[sniper_tower].active = False
-                            self.historyi.append(f"Turn : {self.turn} , {self.sniper_towers[sniper_tower].id} attacked {self.goblins[goblin].id} for 1 damage. {self.goblins[goblin].id} hp={self.goblins[goblin].health}. ")
-                            print(f"{self.sniper_towers[sniper_tower].id} attacked {self.goblins[goblin].id} for 1 damage. {self.goblins[goblin].id} hp={self.goblins[goblin].health}. ")
-
-                        else:
-                            self.historyi.append(f"Turn : {self.turn} , {self.goblins[goblin].id} is killed by {self.sniper_towers[sniper_tower].id}")
-                            print(f"{self.goblins[goblin].id} is killed by {self.sniper_towers[sniper_tower].id} ")
-                            self.total_components[self.goblins[goblin].position].remove(self.goblins[goblin].id)
-                            self.sniper_towers[sniper_tower].active = False
-                            to_pop.append(goblin)
-
-            for p in to_pop:
-                self.goblins.pop(p)
-            if self.sniper_towers[sniper_tower].active == True:        
-                self.historyi.append(f"Turn : {self.turn} , {self.sniper_towers[sniper_tower].id} found no enemy in range. ")
-                print(f"{self.sniper_towers[sniper_tower].id} found no enemy in range. ")
-            else:
-                self.sniper_towers[sniper_tower].active = True
-
+        run_sniper_towers(self.sniper_towers,self.goblins,self.historyi,self.total_components,self.base,self.turn)
 
         run_towers(self.towers,self.goblins,self.historyi,self.total_components,self.base,self.turn)
-
-
-
 
         run_goblins(self.goblins,self.historyi,self.total_components,self.base,self.turn)
         
