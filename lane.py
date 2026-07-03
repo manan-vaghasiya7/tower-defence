@@ -1,5 +1,6 @@
 from goblin import Goblin
 from tower import Tower
+import sys
 
 class lane:
     def __init__(self):
@@ -61,6 +62,7 @@ class lane:
                 to_pop.append(goblin)
                 if self.base == 0:
                     print("YOU WON")
+                    sys.exit()
 
             else: 
                 self.goblins[goblin].position += 1
@@ -77,23 +79,26 @@ class lane:
             print (f"Status : Completed ")
         else:
             print(f"Status : Running ")
-        print("Turn : {self.turn} ")
-        print("Base Health : {self.base} ")
-        for i in range(0,5):
-            print(i)
-            for j in range(0,len(self.total_components[i])):
-                print(" ")
-        print("Base")
-        print("")
-        print(" ")
-        for i in range(0,5):
-            if(len(self.total_components[i])):
-                print(".  ")
+        print(f"Turn : {self.turn} ")
+        print(f"Base Health : {self.base} \n")
 
+        for i in range(0,5):
+            print(i,end="")
+            print("  ",end="")
+            for j in range(0,len(self.total_components[i])):
+                print("   " ,end="")
+        print("Base")
+
+        for i in range(0,5):
+            if(len(self.total_components[i]) == 0):
+                print(". ",end="")
+                print("    ",end="")
             else:
                 for j in self.total_components[i]:
-                    print (j ,",")
-                print(" ")
+                    print (j,end="")
+                    print(",",end="")
+
+                print(" ",end="")
                 
     def historyi(self):
         for i in self.total_components:
