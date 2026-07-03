@@ -1,4 +1,5 @@
 from lane import lane
+import sys
 
 lane1 = lane()
 gid = 1
@@ -43,3 +44,6 @@ while(True):
 
     elif(command == "HISTORY"):
         lane1.history()    
+
+    elif(command == "EXIT"):
+        sys.exit()

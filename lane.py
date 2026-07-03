@@ -41,7 +41,7 @@ class lane:
                             print(f"{self.towers[tower].id} attacked {self.goblins[goblin].id} for 1 damage. {self.goblins[goblin].id} hp={self.goblins[goblin].health}. ")
 
                         else:
-                            self.historyi.append(f"{self.goblins[goblin].id} is killed ")
+                            self.historyi.append(f"Turn : {self.turn} , {self.goblins[goblin].id} is killed ")
                             print(f"{self.goblins[goblin].id} is killed ")
                             self.total_components[self.goblins[goblin].position].remove(self.goblins[goblin].id)
                             self.towers[tower].active = False
@@ -58,16 +58,18 @@ class lane:
         for goblin in self.goblins:
             if self.goblins[goblin].position == 4:
                 self.base -= 1
-                self.historyi.append("Turn : {self.turn} , {self.goblins.id} attacked Base for 1 damage. Base hp ={self.base} ")
+                self.historyi.append(f"Turn : {self.turn} , {self.goblins.id} attacked Base for 1 damage and {self.goblins[goblin].id} is removed. Base hp ={self.base} ")
                 print(f"{self.goblins[goblin].id} attacked Base for 1 damage and {self.goblins[goblin].id} is removed. Base hp ={self.base}  ")
                 self.total_components[self.goblins[goblin].position].remove(self.goblins[goblin].id)
                 to_pop.append(goblin)
                 if self.base == 0:
+                    self.historyi.append("YOU WON")
                     print("YOU WON")
                     sys.exit()
 
             else: 
                 self.goblins[goblin].position += 1
+                self.historyi.append(f"{self.goblins[goblin].id} moved from {self.goblins[goblin].position-1} to {self.goblins[goblin].position} ")
                 print(f"{self.goblins[goblin].id} moved from {self.goblins[goblin].position-1} to {self.goblins[goblin].position} ")
                 self.total_components[self.goblins[goblin].position-1].remove(self.goblins[goblin].id)
                 self.total_components[self.goblins[goblin].position].append(self.goblins[goblin].id)
