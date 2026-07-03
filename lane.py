@@ -1,6 +1,8 @@
 from goblin import Goblin
 from tower import Tower
 from sniper_tower import SniperTower
+from run_components.run_towers import run_towers
+from run_components.run_goblins import run_goblins
 import sys
 
 class lane:
@@ -8,10 +10,10 @@ class lane:
         self.goblins = {}
         self.towers = {}
         self.sniper_towers = {}
-        self.base = 10
-        self.turn = 0
         self.historyi = []
         self.total_components = [[],[],[],[],[],[]]
+        self.base = 10
+        self.turn = 0
 
 
     def create_goblin(self,id):
@@ -41,58 +43,8 @@ class lane:
     def run_turn(self):
         self.turn += 1
         print(f"Turn {self.turn} started.")
-
-
-        for tower in self.towers:
-            to_pop = []
-            for goblin in self.goblins:
-
-                if self.towers[tower].active == True:
-                    if self.towers[tower].position == self.goblins[goblin].position or self.towers[tower].position +1 == self.goblins[goblin].position or self.towers[tower].position -1 == self.goblins[goblin].position:
-
-                        if self.goblins[goblin].health > 1:
-                            self.goblins[goblin].health -= 1
-                            self.towers[tower].active = False
-                            self.historyi.append(f"Turn : {self.turn} , {self.towers[tower].id} attacked {self.goblins[goblin].id} for 1 damage. {self.goblins[goblin].id} hp={self.goblins[goblin].health}. ")
-                            print(f"{self.towers[tower].id} attacked {self.goblins[goblin].id} for 1 damage. {self.goblins[goblin].id} hp={self.goblins[goblin].health}. ")
-
-                        else:
-                            self.historyi.append(f"Turn : {self.turn} , {self.goblins[goblin].id} is killed ")
-                            print(f"{self.goblins[goblin].id} is killed ")
-                            self.total_components[self.goblins[goblin].position].remove(self.goblins[goblin].id)
-                            self.towers[tower].active = False
-                            to_pop.append(goblin)
-    
-            for p in to_pop:
-                self.goblins.pop(p)
-            if self.towers[tower].active == True:        
-                self.historyi.append(f"Turn : {self.turn} , {self.towers[tower].id} found no enemy in range. ")
-                print(f"{self.towers[tower].id} found no enemy in range. ")
-            else:
-                self.towers[tower].active = True
-
-
-        to_pop = []
-        for goblin in self.goblins:
-            if self.goblins[goblin].position == 4:
-                self.base -= 1
-                self.historyi.append(f"Turn : {self.turn} , {self.goblins.id} attacked Base for 1 damage and {self.goblins[goblin].id} is removed. Base hp ={self.base} ")
-                print(f"{self.goblins[goblin].id} attacked Base for 1 damage and {self.goblins[goblin].id} is removed. Base hp ={self.base}  ")
-                self.total_components[self.goblins[goblin].position].remove(self.goblins[goblin].id)
-                to_pop.append(goblin)
-                if self.base == 0:
-                    self.historyi.append("YOU WON")
-                    print("YOU WON")
-                    sys.exit()
-
-            else: 
-                self.goblins[goblin].position += 1
-                self.historyi.append(f"{self.goblins[goblin].id} moved from {self.goblins[goblin].position-1} to {self.goblins[goblin].position} ")
-                print(f"{self.goblins[goblin].id} moved from {self.goblins[goblin].position-1} to {self.goblins[goblin].position} ")
-                self.total_components[self.goblins[goblin].position-1].remove(self.goblins[goblin].id)
-                self.total_components[self.goblins[goblin].position].append(self.goblins[goblin].id)
-        for p in to_pop:
-            self.goblins.pop(p)
+        run_towers(self.towers,self.goblins,self.historyi,self.total_components,self.base,self.turn)
+        run_goblins(self.goblins,self.historyi,self.total_components,self.base,self.turn)
         
 
 
