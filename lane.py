@@ -89,7 +89,7 @@ class lane:
                 else:
                     position_length = 1
                     for j in self.total_components[i]:
-                        position_length += len(j)
+                        position_length += (len(j)+1)
                 
                 all_lengths.append(position_length)
 
