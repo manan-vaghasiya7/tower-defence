@@ -13,11 +13,10 @@ while(True):
     
     elif(command.startswith("ADD_TOWER lane1")):
         parts = command.split()
-        if(parts[2] > 4 or parts[2] < 0):
-            print("YOU HAVE ENTERED THE WRONG POSITION TO CREATE TOWER")
-        else:
-            id = 'T'+str(tid)
-            lane.create_tower(id,parts[2])
+        position = int(parts[2])
+        if(position >= 0 and position <= 4):
+            id = 'T' + str(tid)
+            lane1.create_tower(id,position)
             tid += 1
 
     elif(command == "RUN_TURN"):
