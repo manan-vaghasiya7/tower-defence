@@ -11,30 +11,14 @@ while(True):
         lane1.create_goblin(id)
         gid += 1
     
-    elif(command == "ADD_TOWER lane1 0"):
-        id = 'T' + str(tid)
-        lane1.create_tower(0)
-        tid += 1
-
-    elif(command == "ADD_TOWER lane1 1"):
-        id = 'T' + str(tid)
-        lane1.create_tower(id,1)
-        tid += 1
-
-    elif(command == "ADD_TOWER lane1 2"):
-        id = 'T' + str(tid)
-        lane1.create_tower(id,2)
-        tid += 1
-
-    elif(command == "ADD_TOWER lane1 3"):
-        id = 'T' + str(tid)
-        lane1.create_tower(id,3)
-        tid += 1
-
-    elif(command == "ADD_TOWER lane1 4"):
-        id = 'T' + str(tid)
-        lane1.create_tower(id,4)
-        tid += 1
+    elif(command.startswith("ADD_TOWER lane1")):
+        parts = command.split()
+        if(parts[2] > 4 or parts[2] < 0):
+            print("YOU HAVE ENTERED THE WRONG POSITION TO CREATE TOWER")
+        else:
+            id = 'T'+str(tid)
+            lane.create_tower(id,parts[2])
+            tid += 1
 
     elif(command == "RUN_TURN"):
         lane1.run_turn()
