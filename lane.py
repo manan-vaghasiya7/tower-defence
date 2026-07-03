@@ -1,31 +1,47 @@
 from goblin import Goblin
 from tower import Tower
+from sniper_tower import SniperTower
 import sys
 
 class lane:
     def __init__(self):
-        self.towers = {}
         self.goblins = {}
+        self.towers = {}
+        self.sniper_towers = {}
         self.base = 10
         self.turn = 0
         self.historyi = []
         self.total_components = [[],[],[],[],[],[]]
 
+
     def create_goblin(self,id):
         self.goblins[id] = Goblin(id)
         self.total_components[0].append(id)
-        self.historyi.append(f"Spawned {id} goblin on lane1 at position 0.")
-        print(f"Spawned {id} goblin on lane1 at position 0.")
+        self.historyi.append(f"Spawned {self.goblins[id].id} goblin on lane1 at position 0.")
+        print(f"Spawned {self.goblins[id].id} goblin on lane1 at position 0.")
+
+
 
     def create_tower(self,id,position):
         self.towers[id] = Tower(id,position)
         self.total_components[position].append(id)
-        self.historyi.append(f"Added {id} tower on lane1 at position {position}.")
-        print(f"Added {id} tower on lane1 at position {position}.")
+        self.historyi.append(f"Added {self.towers[id].id} tower on lane1 at position {self.towers[id].position}.")
+        print(f"Added {self.towers[id].id} tower on lane1 at position {self.towers[id].position}.")
+
+
+
+    def create_sniper_tower(self,id,position,range):
+        self.sniper_towers[id] = SniperTower(id,position,range)
+        self.total_components[position].append(id)
+        self.historyi.append(f"Added {self.sniper_towers[id].id} sniper tower on lane1 of range {self.sniper_towers[id].range} at position {self.sniper_towers[id].position}.")
+        print(f"Added {self.sniper_towers[id].id} sniper tower on lane1 of range {self.sniper_towers[id].range} at position {self.sniper_towers[id].position}.")
+
+
 
     def run_turn(self):
         self.turn += 1
         print(f"Turn {self.turn} started.")
+
 
         for tower in self.towers:
             to_pop = []
@@ -54,6 +70,8 @@ class lane:
                 print(f"{self.towers[tower].id} found no enemy in range. ")
             else:
                 self.towers[tower].active = True
+
+
         to_pop = []
         for goblin in self.goblins:
             if self.goblins[goblin].position == 4:
