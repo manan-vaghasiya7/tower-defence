@@ -6,7 +6,7 @@ def run_goblins(goblins,historyi,total_components,base,turn):
     for goblin in goblins:
         if goblins[goblin].position == 4:
             base -= 1
-            historyi.append(f"Turn : {turn} , {goblins.id} attacked Base for 1 damage and {goblins[goblin].id} is removed. Base hp ={base} ")
+            historyi.append(f"Turn : {turn} , {goblins[goblin].id} attacked Base for 1 damage and {goblins[goblin].id} is removed. Base hp ={base} ")
             print(f"{goblins[goblin].id} attacked Base for 1 damage and {goblins[goblin].id} is removed. Base hp ={base}  ")
             total_components[goblins[goblin].position].remove(goblins[goblin].id)
             to_pop.append(goblin)
