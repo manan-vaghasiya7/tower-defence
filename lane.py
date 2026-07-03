@@ -14,12 +14,13 @@ class lane:
     def create_goblin(self,id):
         self.goblins[id] = Goblin(id)
         self.total_components[0].append(id)
+        self.historyi.append(f"Spawned {id} goblin on lane1 at position 0.")
         print(f"Spawned {id} goblin on lane1 at position 0.")
 
     def create_tower(self,id,position):
-        self.historyi.append("Added {id} tower on lane1 at position {position}.")
         self.towers[id] = Tower(id,position)
         self.total_components[position].append(id)
+        self.historyi.append(f"Added {id} tower on lane1 at position {position}.")
         print(f"Added {id} tower on lane1 at position {position}.")
 
     def run_turn(self):
@@ -36,14 +37,15 @@ class lane:
                         if self.goblins[goblin].health > 1:
                             self.goblins[goblin].health -= 1
                             self.towers[tower].active = False
-                            self.historyi.append("Turn : {self.turn} , {self.towers[tower].id} attacked {self.goblins[goblin].id} for 1 damage. {self.goblins[goblin].id} hp={self.goblins[goblin].health}. ")
+                            self.historyi.append(f"Turn : {self.turn} , {self.towers[tower].id} attacked {self.goblins[goblin].id} for 1 damage. {self.goblins[goblin].id} hp={self.goblins[goblin].health}. ")
                             print(f"{self.towers[tower].id} attacked {self.goblins[goblin].id} for 1 damage. {self.goblins[goblin].id} hp={self.goblins[goblin].health}. ")
 
                         else:
+                            self.historyi.append(f"{self.goblins[goblin].id} is killed ")
                             print(f"{self.goblins[goblin].id} is killed ")
-                            to_pop.append(goblin)
                             self.total_components[self.goblins[goblin].position].remove(self.goblins[goblin].id)
                             self.towers[tower].active = False
+                            to_pop.append(goblin)
     
             for p in to_pop:
                 self.goblins.pop(p)
@@ -109,7 +111,7 @@ class lane:
             print("🏰")
 
                 
-    def historyi(self):
+    def history(self):
         for i in self.historyi:
             print(i)
         
