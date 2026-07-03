@@ -1,4 +1,3 @@
-
 def run_sniper_towers(sniper_towers,goblins,historyi,total_components,base,turn):
 
     for sniper_tower in sniper_towers:
