@@ -5,12 +5,14 @@ lane1 = lane()
 gid = 1
 tid = 1
 stid = 1
+sltid = 1
 
 def display_command():
     print ("--------- ALL COMMANDS FOR THIS GAME --------- \n")
     print("SPAWN <lane> <enemyType>")
     print("ADD_TOWER <lane> <position>")
     print("ADD_SNIPER_TOWER <lane> <position> <range>")
+    print("ADD_SLOW_TOWER <lane> position")
     print("RUN_TURN")
     print("STATUS")
     print("HISTORY")
@@ -43,6 +45,17 @@ while(True):
             id = 'ST' + str(stid)
             lane1.create_sniper_tower(id,position,range)
             stid += 1
+        else:
+            print("Enter valid input")
+
+
+    elif(command.startswith("ADD_SLOW_TOWER lane1")):
+        parts = command.split()
+        position = int(parts[2])
+        if(position >= 0 and position <= 4):
+            id = 'SLT' + str(sltid)
+            lane1.create_slow_tower(id,position)
+            sltid += 1
         else:
             print("Enter valid input")
 
