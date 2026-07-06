@@ -3,9 +3,6 @@ from defenses_and_troops.orc import Orc
 from defenses_and_troops.tower import Tower
 from defenses_and_troops.sniper_tower import SniperTower
 from defenses_and_troops.slow_tower import SlowTower
-from run_components.run_goblins import run_goblins
-from run_components.run_sniper_tower import run_sniper_towers
-from run_components.run_orc import run_orc
 import sys
 
 class lane:
@@ -58,12 +55,17 @@ class lane:
         self.turn += 1
         print(f"Turn {self.turn} started.")
 
-        run_sniper_towers(self.sniper_towers,self.goblins,self.historyi,self.total_components,self.base,self.turn)
+        for sniper_tower in self.sniper_towers:
+            self.sniper_towers[sniper_tower].run_sniper_tower(self.goblins,self.historyi,self.total_components,self.base,self.turn)
 
         for tower in self.towers:
             self.towers[tower].run_tower(self.goblins,self.orcs,self.historyi,self.total_components,self.base,self.turn)
 
-        run_goblins(self.goblins,self.historyi,self.total_components,self.base,self.turn)
+        to_pop = []
+        for goblin in self.goblins:
+            self.goblins[goblin].run_goblin(self.historyi,self.total_components,self.base,self.turn,to_pop)
+        for p in to_pop:
+            self.goblins.pop(p)
 
         run_orc(self.orcs,self.historyi,self.total_components,self.base,self.turn)
         
