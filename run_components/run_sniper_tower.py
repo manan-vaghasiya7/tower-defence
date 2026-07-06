@@ -1,29 +1,28 @@
 def run_sniper_towers(sniper_towers,goblins,historyi,total_components,base,turn):
 
     for sniper_tower in sniper_towers:
-        to_pop = []
-        for goblin in goblins:
+        nearest_to_tower = next(iter(goblins))
+        if sniper_towers[sniper_tower].active == True:
+            for goblin in goblins:
+                if abs(sniper_towers[sniper_tower].position - goblins[goblin].position) < abs(sniper_towers[sniper_tower].position - goblins[nearest_to_tower].position):
+                    nearest_to_tower = goblin
+            if abs(goblins[nearest_to_tower].position - sniper_towers[sniper_tower].position) <= sniper_towers[sniper_tower].range:
+                if goblins[nearest_to_tower].health > 1:
+                    goblins[nearest_to_tower].health -= 1
+                    sniper_towers[sniper_tower].active = False
+                    historyi.append(f"Turn : {turn} , {sniper_towers[sniper_tower].id} attacked {goblins[nearest_to_tower].id} for 1 damage. {goblins[nearest_to_tower].id} hp={goblins[nearest_to_tower].health}. ")
+                    print(f"{sniper_towers[sniper_tower].id} attacked {goblins[nearest_to_tower].id} for 1 damage. {goblins[nearest_to_tower].id} hp={goblins[nearest_to_tower].health}. ")
 
-            if sniper_towers[sniper_tower].active == True:
-                if sniper_towers[sniper_tower].range >= abs(goblins[goblin].position - sniper_towers[sniper_tower].position):
+                else:
+                    historyi.append(f"Turn : {turn} , {goblins[nearest_to_tower].id} is killed by {sniper_towers[sniper_tower].id}")
+                    print(f"{goblins[nearest_to_tower].id} is killed by {sniper_towers[sniper_tower].id} ")
+                    total_components[goblins[nearest_to_tower].position].remove(goblins[nearest_to_tower].id)
+                    sniper_towers[sniper_tower].active = False
+                    goblins.pop(nearest_to_tower)
 
-                    if goblins[goblin].health > 1:
-                        goblins[goblin].health -= 1
-                        sniper_towers[sniper_tower].active = False
-                        historyi.append(f"Turn : {turn} , {sniper_towers[sniper_tower].id} attacked {goblins[goblin].id} for 1 damage. {goblins[goblin].id} hp={goblins[goblin].health}. ")
-                        print(f"{sniper_towers[sniper_tower].id} attacked {goblins[goblin].id} for 1 damage. {goblins[goblin].id} hp={goblins[goblin].health}. ")
-
-                    else:
-                        historyi.append(f"Turn : {turn} , {goblins[goblin].id} is killed by {sniper_towers[sniper_tower].id}")
-                        print(f"{goblins[goblin].id} is killed by {sniper_towers[sniper_tower].id} ")
-                        total_components[goblins[goblin].position].remove(goblins[goblin].id)
-                        sniper_towers[sniper_tower].active = False
-                        to_pop.append(goblin)
-
-        for p in to_pop:
-            goblins.pop(p)
         if sniper_towers[sniper_tower].active == True:        
             historyi.append(f"Turn : {turn} , {sniper_towers[sniper_tower].id} found no enemy in range. ")
             print(f"{sniper_towers[sniper_tower].id} found no enemy in range. ")
         else:
             sniper_towers[sniper_tower].active = True
+        

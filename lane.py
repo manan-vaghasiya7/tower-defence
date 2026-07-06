@@ -1,4 +1,5 @@
 from defenses_and_troops.goblin import Goblin
+from defenses_and_troops.orc import Orc
 from defenses_and_troops.tower import Tower
 from defenses_and_troops.sniper_tower import SniperTower
 from defenses_and_troops.slow_tower import SlowTower
@@ -17,6 +18,8 @@ class lane:
         self.base = 10
         self.turn = 0
         self.slow_towers = {}
+        self.orcs = {}
+
 
 
     def create_goblin(self,id):
@@ -25,15 +28,17 @@ class lane:
         self.historyi.append(f"Spawned {self.goblins[id].id} goblin on lane1 at position 0.")
         print(f"Spawned {self.goblins[id].id} goblin on lane1 at position 0.")
 
-
+    def create_orc(self,id):
+        self.orcs[id] = Orc(id)
+        self.total_components[0].append(id)
+        self.historyi.append(f"Spawned {self.orcs[id].id} orc on lane1 at position 0.")
+        print(f"Spawned {self.orcs[id].id} orc on lane1 at position 0.")
 
     def create_tower(self,id,position):
         self.towers[id] = Tower(id,position)
         self.total_components[position].append(id)
         self.historyi.append(f"Added {self.towers[id].id} tower on lane1 at position {self.towers[id].position}.")
         print(f"Added {self.towers[id].id} tower on lane1 at position {self.towers[id].position}.")
-
-
 
     def create_sniper_tower(self,id,position,range):
         self.sniper_towers[id] = SniperTower(id,position,range)
@@ -46,6 +51,7 @@ class lane:
         self.total_components[position].append(id)
         self.historyi.append(f"Added {self.slow_towers[id].id} slow tower on lane1 at position {self.slow_towers[id].position}.")
         print(f"Added {self.slow_towers[id].id} slow tower on lane1 {self.slow_towers[id].position}.")
+
 
 
     def run_turn(self):
