@@ -55,20 +55,27 @@ class lane:
         self.turn += 1
         print(f"Turn {self.turn} started.")
 
+        # Run SniperTowers
         for sniper_tower in self.sniper_towers:
             self.sniper_towers[sniper_tower].run_sniper_tower(self.goblins,self.historyi,self.total_components,self.base,self.turn)
 
+        # Run Towers
         for tower in self.towers:
             self.towers[tower].run_tower(self.goblins,self.orcs,self.historyi,self.total_components,self.base,self.turn)
 
+        # Run Goblins
         to_pop = []
         for goblin in self.goblins:
             self.goblins[goblin].run_goblin(self.historyi,self.total_components,self.base,self.turn,to_pop)
         for p in to_pop:
             self.goblins.pop(p)
 
-        run_orc(self.orcs,self.historyi,self.total_components,self.base,self.turn)
-        
+        # Run Orcs
+        to_pop = []
+        for orc in self.orcs:
+            self.orcs[orc].run_tower(self.historyi,self.total_components,self.base,self.turn,to_pop)
+        for p in to_pop:
+            self.orcs.pop(p)
 
 
     def status(self):
