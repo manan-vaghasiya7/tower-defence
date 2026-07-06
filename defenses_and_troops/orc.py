@@ -25,3 +25,4 @@ class Orc:
             print(f"{self.id} moved from {self.position-1} to {self.position} ")
             total_components[self.position-1].remove(self.id)
             total_components[self.position].append(self.id)
+        return base

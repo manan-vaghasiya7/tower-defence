@@ -24,3 +24,5 @@ class Goblin:
             total_components[self.position-1].remove(self.id)
             total_components[self.position].append(self.id)
 
+        return base
+
