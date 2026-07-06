@@ -3,6 +3,7 @@ from defenses_and_troops.orc import Orc
 from defenses_and_troops.tower import Tower
 from defenses_and_troops.sniper_tower import SniperTower
 from defenses_and_troops.slow_tower import SlowTower
+from defenses_and_troops.runner import Runner
 import sys
 
 class lane:
@@ -16,6 +17,7 @@ class lane:
         self.turn = 0
         self.slow_towers = {}
         self.orcs = {}
+        self.runners = {}
 
 
 
@@ -30,6 +32,12 @@ class lane:
         self.total_components[0].append(id)
         self.historyi.append(f"Spawned {self.orcs[id].id} orc on lane1 at position 0.")
         print(f"Spawned {self.orcs[id].id} orc on lane1 at position 0.")
+    
+    def create_runner(self,id):
+        self.runners[id] = Runner(id)
+        self.total_components[0].append(id)
+        self.historyi.append(f"Spawned {self.runners[id].id} orc on lane1 at position 0.")
+        print(f"Spawned {self.runners[id].id} orc on lane1 at position 0.")
 
     def create_tower(self,id,position):
         self.towers[id] = Tower(id,position)

@@ -1,4 +1,4 @@
-class runner:
+class Runner:
     def __init__(self,id):
         self.id = id
         self.health = 2

@@ -3,6 +3,7 @@ class Goblin:
     def __init__(self,id):
         self.id = id
         self.health = 3
+        self.speed = 1
         self.position = 0
     
     def run_goblin(self,historyi,total_components,base,turn,to_pop):
