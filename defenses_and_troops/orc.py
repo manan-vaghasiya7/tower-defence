@@ -5,14 +5,15 @@ class Orc:
         self.id = id
         self.health = 5
         self.speed = 1
+        self.position = 0
 
-    def __init__(self,historyi,total_components,base,turn,to_pop):
+    def run_orc(self,historyi,total_components,base,turn,to_pop):
         if self.position == 4:
             base -= 1
             historyi.append(f"Turn : {turn} , {self.id} attacked Base for 1 damage and {self.id} is removed. Base hp ={base} ")
             print(f"{self.id} attacked Base for 1 damage and {self.id} is removed. Base hp ={base}  ")
             total_components[self.position].remove(self.id)
-            to_pop.append(self)
+            to_pop.append(self.id)
             if base == 0:
                 historyi.append("YOU WON")
                 print("YOU WON")

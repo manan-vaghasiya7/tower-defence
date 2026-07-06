@@ -73,7 +73,7 @@ class lane:
         # Run Orcs
         to_pop = []
         for orc in self.orcs:
-            self.orcs[orc].run_tower(self.historyi,self.total_components,self.base,self.turn,to_pop)
+            self.orcs[orc].run_orc(self.historyi,self.total_components,self.base,self.turn,to_pop)
         for p in to_pop:
             self.orcs.pop(p)
 

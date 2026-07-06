@@ -28,9 +28,9 @@ while(True):
         gid += 1
 
     elif(command == "SPAWN lane1 orc"):
-        id = 'O' + str(oid)
+        id = 'OR' + str(oid)
         lane1.create_orc(id)
-        gid += 1
+        oid += 1
 
     elif(command.startswith("ADD_TOWER lane1")):
         parts = command.split() 
