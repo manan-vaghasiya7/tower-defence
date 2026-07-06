@@ -6,6 +6,7 @@ gid = 1
 tid = 1
 stid = 1
 sltid = 1
+oid = 1
 
 def display_command():
     print ("--------- ALL COMMANDS FOR THIS GAME --------- \n")
@@ -24,6 +25,11 @@ while(True):
     if(command == "SPAWN lane1 goblin"):
         id = 'E' + str(gid)
         lane1.create_goblin(id)
+        gid += 1
+
+    elif(command == "SPAWN lane1 orc"):
+        id = 'O' + str(oid)
+        lane1.create_orc(id)
         gid += 1
 
     elif(command.startswith("ADD_TOWER lane1")):
