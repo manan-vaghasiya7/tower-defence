@@ -7,6 +7,7 @@ tid = 1
 stid = 1
 sltid = 1
 oid = 1
+rnid = 1
 
 def display_command():
     print ("--------- ALL COMMANDS FOR THIS GAME --------- \n")
@@ -31,6 +32,11 @@ while(True):
         id = 'OR' + str(oid)
         lane1.create_orc(id)
         oid += 1
+    
+    elif(command == "SPAWN lane1 runner"):
+        id = "RN" + str(rnid)
+        lane1.create_runner(id)
+        rnid += 1
 
     elif(command.startswith("ADD_TOWER lane1")):
         parts = command.split() 
