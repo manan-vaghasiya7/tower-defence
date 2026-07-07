@@ -7,6 +7,20 @@ class Goblin:
         self.position = 0
         self.slow_applied = False
         self.dont_move = False
+        self.poison = 0
+
+    def poison_attack(self,historyi,total_components,turn,to_pop):
+        if self.health > 1:
+            self.health -= 1
+            historyi.append(f"Turn : {turn} ,{self.id} is attacked by poison for 1 damage. {self.id} hp={self.health}. ")
+            print(f"{self.id} is attacked by poison for 1 damage. {self.id} hp={self.health}. ")
+
+        else:
+            historyi.append(f"Turn : {turn} , {self.id} is killed by poison")
+            print(f"{self.id} is killed by poison")
+            total_components[self.position].remove(self.id)
+            to_pop.append(self.id)
+        self.poison -= 1
     
     def run_goblin(self,historyi,total_components,base,turn,to_pop):
         if self.dont_move == True:
@@ -22,6 +36,7 @@ class Goblin:
                     historyi.append("YOU WON")
                     print("YOU WON")
                     sys.exit()
+                return base
 
             else : 
                 self.position += 1
@@ -30,10 +45,12 @@ class Goblin:
                 total_components[self.position-1].remove(self.id)
                 total_components[self.position].append(self.id)
 
+        if self.poison > 0:
+            self.poison_attack(historyi,total_components,turn,to_pop)
+
         return base
     
     def make_slow(self):
         self.slow_applied = True
         self.dont_move = True
-
-
+        
