@@ -55,14 +55,17 @@ while(True):
 
     elif(command.startswith("ADD_SNIPER_TOWER lane1")):
         parts = command.split()
-        position = int(parts[2])
-        range = int(parts[3])
-        if(position >= 0 and position <= 4 and range >= 1 and range <= max(position,4-position)):
-            id = 'ST' + str(stid)
-            lane1.create_sniper_tower(id,position,range)
-            stid += 1
-        else:
+        if(len(parts) != 4):
             print("Enter valid input")
+        else:
+            position = int(parts[2])
+            range = int(parts[3])
+            if(position >= 0 and position <= 4 and range >= 1 and range <= max(position,4-position)):
+                id = 'ST' + str(stid)
+                lane1.create_sniper_tower(id,position,range)
+                stid += 1
+            else:
+                print("Enter valid input")
 
 
     elif(command.startswith("ADD_SLOW_TOWER lane1")):
