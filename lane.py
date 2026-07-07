@@ -95,6 +95,10 @@ class lane:
         for poison_tower in self.poison_towers:
             self.poison_towers[poison_tower].run_poison_tower(self.goblins,self.orcs,self.runners,self.historyi,self.total_components,self.base,self.turn)
 
+        # Fisher Towers
+        for fisher_tower in self.fisher_towers:
+            self.fisher_towers[fisher_tower].run_fisher_tower(self.goblins,self.orcs,self.runners,self.historyi,self.total_components,self.base,self.turn)
+
         # Run Goblins
         to_pop = []
         for goblin in self.goblins:
