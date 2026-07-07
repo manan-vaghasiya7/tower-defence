@@ -5,6 +5,7 @@ from defenses_and_troops.tower import Tower
 from defenses_and_troops.sniper_tower import SniperTower
 from defenses_and_troops.slow_tower import SlowTower
 from defenses_and_troops.poison_tower import PoisonTower
+from defenses_and_troops.fisher_tower import FisherTower
 import sys
 
 class lane:
@@ -20,6 +21,7 @@ class lane:
         self.orcs = {}
         self.runners = {}
         self.poison_towers = {}
+        self.fisher_towers = {}
 
 
 
@@ -64,7 +66,13 @@ class lane:
         self.total_components[position].append(id)
         self.historyi.append(f"Added {self.poison_towers[id].id} slow tower on lane1 at position {self.poison_towers[id].position}.")
         print(f"Added {self.poison_towers[id].id} slow tower on lane1 at position {self.poison_towers[id].position}.")
-
+    
+    def create_fisher_tower(self,id,position):
+        self.fisher_towers[id] = FisherTower(id,position)
+        self.total_components[position].append(id)
+        self.historyi.append(f"Added {self.fisher_towers[id].id} slow tower on lane1 at position {self.fisher_towers[id].position}.")
+        print(f"Added {self.fisher_towers[id].id} slow tower on lane1 at position {self.fisher_towers[id].position}.")
+    
 
 
     def run_turn(self):
