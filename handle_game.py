@@ -72,7 +72,7 @@ while(True):
         else:
             print("Enter valid input")
 
-    elif(command.startswith("ADD_POSISON_TOWER lane1")):
+    elif(command.startswith("ADD_POISON_TOWER lane1")):
         parts = command.split()
         position = int(parts[2])
         if(position >= 0 and position <= 4):
