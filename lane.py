@@ -1,9 +1,10 @@
 from defenses_and_troops.goblin import Goblin
 from defenses_and_troops.orc import Orc
+from defenses_and_troops.runner import Runner
 from defenses_and_troops.tower import Tower
 from defenses_and_troops.sniper_tower import SniperTower
 from defenses_and_troops.slow_tower import SlowTower
-from defenses_and_troops.runner import Runner
+from defenses_and_troops.poison_tower import PoisonTower
 import sys
 
 class lane:
@@ -18,6 +19,7 @@ class lane:
         self.slow_towers = {}
         self.orcs = {}
         self.runners = {}
+        self.poison_towers = {}
 
 
 
@@ -57,6 +59,12 @@ class lane:
         self.historyi.append(f"Added {self.slow_towers[id].id} slow tower on lane1 at position {self.slow_towers[id].position}.")
         print(f"Added {self.slow_towers[id].id} slow tower on lane1 at position {self.slow_towers[id].position}.")
 
+    def create_poison_tower(self,id,position):
+        self.poison_towers[id] = PoisonTower(id,position)
+        self.total_components[position].append(id)
+        self.historyi.append(f"Added {self.poison_towers[id].id} slow tower on lane1 at position {self.poison_towers[id].position}.")
+        print(f"Added {self.poison_towers[id].id} slow tower on lane1 at position {self.poison_towers[id].position}.")
+
 
 
     def run_turn(self):
@@ -74,6 +82,10 @@ class lane:
         # SLow Towers
         for slow_tower in self.slow_towers:
             self.slow_towers[slow_tower].run_slow_tower(self.goblins,self.orcs,self.runners,self.historyi,self.total_components,self.base,self.turn)
+
+        # Posion Towers
+        for poison_tower in self.poison_towers:
+            self.poison_towers[poison_tower].run_poison_tower(self.goblins,self.orcs,self.runners,self.historyi,self.total_components,self.base,self.turn)
 
         # Run Goblins
         to_pop = []
