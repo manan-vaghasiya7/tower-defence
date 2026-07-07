@@ -10,19 +10,26 @@ class Tower:
 
         if self.active == True:
 
-            for goblin in goblins:
-                if abs(self.position - goblins[goblin].position) < 5:
-                    nearest_to_tower = goblins[goblin]
+            # Traversing in all troops to select best troop to attack
+            if len(goblins) > 0:
+                nearest_to_tower = next(iter(goblins))
+                for goblin in goblins:
+                    if abs(self.position - goblins[goblin].position) <= abs(self.position - nearest_to_tower.position):
+                        nearest_to_tower = goblins[goblin]
 
             if "nearest_to_tower" in locals():
                 for orc in orcs:
                     if abs(self.position - orcs[orc].position) < abs(self.position - nearest_to_tower.position):
                         nearest_to_tower = orcs[orc]
             else:
+                if len(orcs) > 0:
+                    nearest_to_tower = next(iter(orcs))
                 for orc in orcs:
-                    if abs(self.position - orcs[orc].position) < 5:
+                    if abs(self.position - orcs[orc].position) <= abs(self.position - nearest_to_tower.position):
                         nearest_to_tower = orcs[orc]
 
+
+            # Attacking the best selected troop from all (if present)
             if "nearest_to_tower" in locals():
                 if abs(nearest_to_tower.position - self.position) <= 1:
                     if nearest_to_tower.health > 1:

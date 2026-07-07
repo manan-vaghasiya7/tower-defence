@@ -65,7 +65,7 @@ class lane:
 
         # Run SniperTowers
         for sniper_tower in self.sniper_towers:
-            self.sniper_towers[sniper_tower].run_sniper_tower(self.goblins,self.historyi,self.total_components,self.base,self.turn)
+            self.sniper_towers[sniper_tower].run_sniper_tower(self.goblins,self.orcs,self.historyi,self.total_components,self.base,self.turn)
 
         # Run Towers
         for tower in self.towers:
@@ -84,6 +84,13 @@ class lane:
             self.base = self.orcs[orc].run_orc(self.historyi,self.total_components,self.base,self.turn,to_pop)
         for p in to_pop:
             self.orcs.pop(p)
+
+        # Run Runners
+        to_pop = []
+        for runner in self.runners:
+            self.base = self.runners[runner].run_runner(self.historyi,self.total_components,self.base,self.turn,to_pop)
+        for p in to_pop:
+            self.runners.pop(p)
 
 
     def status(self):
@@ -124,5 +131,3 @@ class lane:
     def history(self):
         for i in self.historyi:
             print(i)
-        
-                    
