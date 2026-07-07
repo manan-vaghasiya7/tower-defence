@@ -23,7 +23,7 @@ class SlowTower:
             # Traverse in Orc
             if nearest_to_tower is not None:
                 for orc in orcs:
-                    if abs(self.position - orcs[orc].position) < abs(self.position - nearest_to_tower.position) and goblins[goblin].slow_appied == False:
+                    if abs(self.position - orcs[orc].position) < abs(self.position - nearest_to_tower.position) and orcs[orc].slow_applied == False:
                         nearest_to_tower = orcs[orc]
             else:
                 if len(orcs) > 0:
