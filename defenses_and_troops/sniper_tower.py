@@ -70,27 +70,3 @@ class SniperTower:
             print(f"{self.id} found no enemy in range. ")
         else:
             self.active = True
-
-
-
-
-                    
-        #     if abs(goblins[nearest_to_tower].position - self.position) <= self.range:
-        #         if goblins[nearest_to_tower].health > 1:
-        #             goblins[nearest_to_tower].health -= 1
-        #             self.active = False
-        #             historyi.append(f"Turn : {turn} , {self.id} attacked {goblins[nearest_to_tower].id} for 1 damage. {goblins[nearest_to_tower].id} hp={goblins[nearest_to_tower].health}. ")
-        #             print(f"{self.id} attacked {goblins[nearest_to_tower].id} for 1 damage. {goblins[nearest_to_tower].id} hp={goblins[nearest_to_tower].health}. ")
-
-        #         else:
-        #             historyi.append(f"Turn : {turn} , {goblins[nearest_to_tower].id} is killed by {self.id}")
-        #             print(f"{goblins[nearest_to_tower].id} is killed by {self.id} ")
-        #             total_components[goblins[nearest_to_tower].position].remove(goblins[nearest_to_tower].id)
-        #             self.active = False
-        #             goblins.pop(nearest_to_tower)
-
-        # if self.active == True:        
-        #     historyi.append(f"Turn : {turn} , {self.id} found no enemy in range. ")
-        #     print(f"{self.id} found no enemy in range. ")
-        # else:
-        #     self.active = True
