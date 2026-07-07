@@ -1,5 +1,6 @@
 from defenses_and_troops.goblin import Goblin
 from defenses_and_troops.orc import Orc
+from defenses_and_troops.runner import Runner
 class SniperTower:
     def __init__(self,id,position,range):
         self.id = id
@@ -8,15 +9,19 @@ class SniperTower:
         self.position = position
 
     def run_sniper_tower(self,goblins,orcs,runners,historyi,total_components,base,turn):
+        nearest_to_tower = None
+
         if self.active == True:
 
+            # Traversing in all troops to select best troop to attack
+            # Traverse in Goblin
             if len(goblins) > 0:
                 nearest_to_tower = goblins[next(iter(goblins))]
                 for goblin in goblins:
                     if abs(self.position - goblins[goblin].position) <= abs(self.position - nearest_to_tower.position):
                         nearest_to_tower = goblins[goblin]
-
-            if "nearest_to_tower" in locals():
+            # Traverse in Orc
+            if nearest_to_tower is not None:
                 for orc in orcs:
                     if abs(self.position - orcs[orc].position) < abs(self.position - nearest_to_tower.position):
                         nearest_to_tower = orcs[orc]
@@ -26,8 +31,8 @@ class SniperTower:
                     for orc in orcs:
                         if abs(self.position - orcs[orc].position) <= abs(self.position - nearest_to_tower.position):
                             nearest_to_tower = orcs[orc]
-
-            if "nearest_to_tower" in locals():
+            # Traverse in Runner
+            if nearest_to_tower is not None:
                 for runner in runners:
                     if abs(self.position - runners[runner].position) < abs(self.position - nearest_to_tower.position):
                         nearest_to_tower = runners[runner]
@@ -38,7 +43,9 @@ class SniperTower:
                     if abs(self.position - runners[runner].position) <= abs(self.position - nearest_to_tower.position):
                         nearest_to_tower = runners[runner]
 
-            if "nearest_to_tower" in locals():
+            
+            # Attacking the best selected troop from all (if present)
+            if nearest_to_tower is not None:
                 if abs(nearest_to_tower.position - self.position) <= self.range:
                     if nearest_to_tower.health > 1:
                         nearest_to_tower.health -= 1
@@ -55,6 +62,8 @@ class SniperTower:
                             goblins.pop(nearest_to_tower.id)
                         elif isinstance(nearest_to_tower,Orc):
                             orcs.pop(nearest_to_tower.id)
+                        elif isinstance(nearest_to_tower,Runner):
+                            runners.pop(nearest_to_tower.id)
 
         if self.active == True:        
             historyi.append(f"Turn : {turn} , {self.id} found no enemy in range. ")
