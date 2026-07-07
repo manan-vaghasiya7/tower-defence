@@ -8,6 +8,7 @@ stid = 1
 sltid = 1
 oid = 1
 rnid = 1
+ptid = 1
 
 def display_command():
     print ("--------- ALL COMMANDS FOR THIS GAME --------- \n")
@@ -68,6 +69,16 @@ while(True):
             id = 'SLT' + str(sltid)
             lane1.create_slow_tower(id,position)
             sltid += 1
+        else:
+            print("Enter valid input")
+
+    elif(command.startswith("ADD_POSISON_TOWER lane1")):
+        parts = command.split()
+        position = int(parts[2])
+        if(position >= 0 and position <= 4):
+            id = 'PT' + str(ptid)
+            lane1.create_poison_tower(id,position)
+            ptid += 1
         else:
             print("Enter valid input")
 
