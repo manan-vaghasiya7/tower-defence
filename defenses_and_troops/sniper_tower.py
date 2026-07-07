@@ -11,7 +11,7 @@ class SniperTower:
         if self.active == True:
 
             if len(goblins) > 0:
-                nearest_to_tower = next(iter(goblins))
+                nearest_to_tower = goblins[next(iter(goblins))]
                 for goblin in goblins:
                     if abs(self.position - goblins[goblin].position) <= abs(self.position - nearest_to_tower.position):
                         nearest_to_tower = goblins[goblin]
@@ -22,10 +22,10 @@ class SniperTower:
                         nearest_to_tower = orcs[orc]
             else:
                 if len(orcs) > 0:
-                    nearest_to_tower = next(iter(orcs))
-                for orc in orcs:
-                    if abs(self.position - orcs[orc].position) <= abs(self.position - nearest_to_tower.position):
-                        nearest_to_tower = orcs[orc]
+                    nearest_to_tower = orcs[next(iter(orcs))]
+                    for orc in orcs:
+                        if abs(self.position - orcs[orc].position) <= abs(self.position - nearest_to_tower.position):
+                            nearest_to_tower = orcs[orc]
 
             if "nearest_to_tower" in locals():
                 if abs(nearest_to_tower.position - self.position) <= self.range:

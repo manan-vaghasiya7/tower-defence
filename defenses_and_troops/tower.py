@@ -12,7 +12,7 @@ class Tower:
 
             # Traversing in all troops to select best troop to attack
             if len(goblins) > 0:
-                nearest_to_tower = next(iter(goblins))
+                nearest_to_tower = goblins[next(iter(goblins))]
                 for goblin in goblins:
                     if abs(self.position - goblins[goblin].position) <= abs(self.position - nearest_to_tower.position):
                         nearest_to_tower = goblins[goblin]
@@ -23,7 +23,7 @@ class Tower:
                         nearest_to_tower = orcs[orc]
             else:
                 if len(orcs) > 0:
-                    nearest_to_tower = next(iter(orcs))
+                    nearest_to_tower = orcs[next(iter(orcs))]
                 for orc in orcs:
                     if abs(self.position - orcs[orc].position) <= abs(self.position - nearest_to_tower.position):
                         nearest_to_tower = orcs[orc]
