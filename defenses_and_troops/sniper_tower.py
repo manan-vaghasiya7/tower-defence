@@ -7,7 +7,7 @@ class SniperTower:
         self.range = range
         self.position = position
 
-    def run_sniper_tower(self,goblins,orcs,historyi,total_components,base,turn):
+    def run_sniper_tower(self,goblins,orcs,runners,historyi,total_components,base,turn):
         if self.active == True:
 
             if len(goblins) > 0:
@@ -26,6 +26,17 @@ class SniperTower:
                     for orc in orcs:
                         if abs(self.position - orcs[orc].position) <= abs(self.position - nearest_to_tower.position):
                             nearest_to_tower = orcs[orc]
+
+            if "nearest_to_tower" in locals():
+                for runner in runners:
+                    if abs(self.position - runners[runner].position) < abs(self.position - nearest_to_tower.position):
+                        nearest_to_tower = runners[runner]
+            else:
+                if len(runners) > 0:
+                    nearest_to_tower = runners[next(iter(runners))]
+                for runner in runners:
+                    if abs(self.position - runners[runner].position) <= abs(self.position - nearest_to_tower.position):
+                        nearest_to_tower = runners[runner]
 
             if "nearest_to_tower" in locals():
                 if abs(nearest_to_tower.position - self.position) <= self.range:

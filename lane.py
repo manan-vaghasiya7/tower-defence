@@ -65,11 +65,11 @@ class lane:
 
         # Run SniperTowers
         for sniper_tower in self.sniper_towers:
-            self.sniper_towers[sniper_tower].run_sniper_tower(self.goblins,self.orcs,self.historyi,self.total_components,self.base,self.turn)
+            self.sniper_towers[sniper_tower].run_sniper_tower(self.goblins,self.orcs,self.runners,self.historyi,self.total_components,self.base,self.turn)
 
         # Run Towers
         for tower in self.towers:
-            self.towers[tower].run_tower(self.goblins,self.orcs,self.historyi,self.total_components,self.base,self.turn)
+            self.towers[tower].run_tower(self.goblins,self.orcs,self.runners,self.historyi,self.total_components,self.base,self.turn)
 
         # Run Goblins
         to_pop = []
