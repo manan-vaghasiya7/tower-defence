@@ -55,7 +55,7 @@ class lane:
         self.slow_towers[id] = SlowTower(id,position)
         self.total_components[position].append(id)
         self.historyi.append(f"Added {self.slow_towers[id].id} slow tower on lane1 at position {self.slow_towers[id].position}.")
-        print(f"Added {self.slow_towers[id].id} slow tower on lane1 {self.slow_towers[id].position}.")
+        print(f"Added {self.slow_towers[id].id} slow tower on lane1 at position {self.slow_towers[id].position}.")
 
 
 
@@ -70,6 +70,10 @@ class lane:
         # Run Towers
         for tower in self.towers:
             self.towers[tower].run_tower(self.goblins,self.orcs,self.runners,self.historyi,self.total_components,self.base,self.turn)
+
+        # SLow Towers
+        for slow_tower in self.slow_towers:
+            self.slow_towers[slow_tower].run_slow_tower(self.goblins,self.orcs,self.runners,self.historyi,self.total_components,self.base,self.turn)
 
         # Run Goblins
         to_pop = []
